@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="../compile.js"></script>
+    </head>
+    <body>
+        <div var id="div">hello</div>
+        <button id="btn">click me</button>
+        <script type="text/javascript">
+        var div = document.getElementById('div');
+        var btn = document.getElementById('btn');
+        var template = `
+        <ul>
+          <% for(var i=0; i < data.supplies.length; i++) { %>
+            <li><%= data.supplies[i] %></li>
+          <% } %>
+        </ul>
+        `;
+
+        var parse = eval(compile(template));
+        btn.addEventListener('click', function () {
+            div.innerHTML = parse({ supplies: [ "broom", "mop", "cleaner" ] });
+        }, false);
+        </script>
+    </body>
+</html>
